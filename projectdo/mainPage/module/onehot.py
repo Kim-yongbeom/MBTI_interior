@@ -1,6 +1,6 @@
 import pandas
 import joblib
-from sklearn.linear_model import LogisticRegression
+# from sklearn.linear_model import LogisticRegression
 
 def tomldata(mbti, sex, age, job, like):
     col_list = ['like',
@@ -28,7 +28,7 @@ def tomldata(mbti, sex, age, job, like):
     ml_df.loc[0] = list2
 
     # 여기 절대경로!!!!!!!!!!!
-    load_model = joblib.load('/Users/gim-yongbeom/PycharmProjects/Django/mbti_project/projectdo/mainPage/module/lr_clf.pkl')
+    load_model = joblib.load('/Users/gim-yongbeom/PycharmProjects/MBTI_interior/projectdo/mainPage/module/lr_clf.pkl')
 
     predict = load_model.predict([ml_df.loc[0]])
     # predict[0]
@@ -42,7 +42,7 @@ def tomldata(mbti, sex, age, job, like):
 #
 #     return load_model
 
-# print(tomldata('ENFJ','남자','20대','무직',1))
+print(tomldata('ENFJ','남자','20대','무직',1))
 
 #
 # load_model = joblib.load('lr_clf.pkl')

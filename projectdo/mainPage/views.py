@@ -69,8 +69,6 @@ def main(request):
                        }
         else:
             mldf = onehot.tomldata(mbti, sex, age, job, int(like))
-            print(mldf)
-
             mood = list(Product.objects.filter(**{mldf: 1}))
             moodpick = random.sample(mood, 10)
             # print(moodpick)

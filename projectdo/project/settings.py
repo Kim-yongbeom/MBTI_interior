@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
 from pathlib import Path
+import pymysql
+pymysql.install_as_MySQLdb()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 from django.contrib import messages
@@ -27,7 +29,7 @@ SECRET_KEY = 'django-insecure-*0=3w&xse0a*&wb&+@gw@egm*y-c*25xpw*i&@stvs)%=pe#vg
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -41,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mainPage.apps.MainpageConfig',
     'signPage.apps.SignpageConfig',
+    'storages', # s3 파일 storages 추가해줌
 ]
 
 MIDDLEWARE = [
@@ -78,13 +81,23 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
+DATABASES = {
+  'default' : {
+      'ENGINE': 'django.db.backends.mysql', # 고정
+      'NAME': 'mldb', # DB 이름
+      'USER': 'root', # 계정
+      'PASSWORD': 'pwpw', # 암호
+      'HOST': 'database-1.c89qkdhmnagi.ap-northeast-2.rds.amazonaws.com', # IP RDS 엔드포인트 복사
+      'PORT': '3306' # 별도로 설정한 게 아니라면 3306일 것이다.
+  }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -122,6 +135,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+# 파일의 끝에 AWS 관련 내용을 추가
+AWS_ACCESS_KEY_ID = 'id' #인증받은 키 아이디 -> I AM에서 인증받은 사용자 키!!
+AWS_SECRET_ACCESS_KEY = 'pw' # 비번
+AWS_S3_REGION_NAME = 'ap-northeast-2' #지역
+AWS_STORAGE_BUCKET_NAME = 'longsong' # s3 이름
+AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com"
+AWS_DEFAULT_ACL = 'public-read'
+
 STATIC_URL = '/static/'
 
 # Default primary key field type
@@ -142,5 +163,7 @@ MESSAGE_TAGS = {
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+STATICFILES_STORAGE = 'project.storage.S3StaticStorage' # storage생성해준 다음 작성!!
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
