@@ -271,7 +271,13 @@ def community(request):
     return render(request, 'mainPage/community.html', context)
 
 def insert(request):
-    return render(request, 'mainPage/insert.html')
+    usermbti = User.objects.get(id=request.session['user'])
+
+    context = {
+        'usermbti': usermbti,
+    }
+
+    return render(request, 'mainPage/insert.html', context)
 
 def insert2(request):
     if request.method == 'POST':
@@ -307,9 +313,14 @@ def delete(request, bid):
 
 def edit(request, bid):
     board = Board.objects.get(id=bid)
+
+    usermbti = User.objects.get(id=request.session['user'])
+
     context = {
-        'board': board
+        'board': board,
+        'usermbti': usermbti,
     }
+
     return render(request, 'mainPage/edit.html', context)
 
 def edit2(request, bid):
