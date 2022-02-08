@@ -16,7 +16,7 @@
 - 상품 좋아요, 무한스크롤, 상세페이지, 카테고리
 - 커뮤니티 게시판
 
-<br><br><br>
+<br>
 
 ## 협업 툴 (노션)
 https://docs.google.com/presentation/d/1A5WtZQ4GD6DawcNEz4_zR2m2gVmWHr26/edit#slide=id.p48
