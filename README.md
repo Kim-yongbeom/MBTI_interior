@@ -35,7 +35,7 @@
 <br>
 
 ## 협업 툴 (노션)
-https://docs.google.com/presentation/d/1A5WtZQ4GD6DawcNEz4_zR2m2gVmWHr26/edit#slide=id.p48
+https://www.notion.so/ce7168608612477db8def68c2204213d?v=a533177e3e4a4dc3915afc2c24638e8c
 
 ![screencapture-notion-so-ce7168608612477db8def68c2204213d-2022-02-08-22_22_38](https://user-images.githubusercontent.com/89058117/152995672-42c4dcf4-5f7c-4d82-939c-c09bd6371268.png)
 
